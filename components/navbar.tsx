@@ -29,7 +29,7 @@ export function Navbar() {
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
       className={cn(
-        "sticky top-0 z-50 w-full backdrop-blur transition-all duration-300",
+        "sticky top-0 z-40 w-full backdrop-blur transition-all duration-300",
         scrolled
           ? "bg-white/95 shadow-sm supports-[backdrop-filter]:bg-white/80 dark:bg-slate-900/95 dark:supports-[backdrop-filter]:bg-slate-900/80"
           : "bg-white/50 dark:bg-slate-900/50",
@@ -132,7 +132,14 @@ export function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 top-16 z-50 bg-white dark:bg-slate-900 lg:hidden overflow-y-auto"
+            className="fixed inset-x-0 top-16 z-50 bg-white dark:bg-slate-900 lg:hidden overflow-y-auto shadow-lg mx-auto rounded-b-lg border-t border-slate-200 dark:border-slate-700"
+            style={{ 
+              maxHeight: "80vh", 
+              maxWidth: "90%", 
+              width: "100%", 
+              left: "50%", 
+              transform: "translateX(-50%)" 
+            }}
           >
             <div className="container py-4">
               <nav className="flex flex-col gap-4">

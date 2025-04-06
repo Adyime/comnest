@@ -94,9 +94,9 @@ export function HeroSection() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="border-teal-300 text-teal-100 hover:bg-teal-700/30"
+                className="border-[#125650] text-[#125650] hover:bg-[#125650]/30"
               >
-                <Link href="/solutions">Explore Solutions</Link>
+                <Link href="/solutions/wireless-networking">Explore Solutions</Link>
               </Button>
             </motion.div>
           </motion.div>

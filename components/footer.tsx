@@ -41,11 +41,11 @@ export function Footer() {
           <motion.div variants={item}>
             <h3 className="text-lg font-semibold mb-4">Company Info</h3>
             <ul className="space-y-2">
-              <li>
+              {/* <li>
                 <Link href="/about" className="hover:text-teal-300 transition-colors">
                   About Us
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link href="/contact" className="hover:text-teal-300 transition-colors">
                   Contact
@@ -57,18 +57,18 @@ export function Footer() {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/services" className="hover:text-teal-300 transition-colors">
-                  Services
+                <Link href="/google-workspace" className="hover:text-teal-300 transition-colors">
+                Google Workspace
                 </Link>
               </li>
               <li>
-                <Link href="/solutions" className="hover:text-teal-300 transition-colors">
-                  Solutions
+                <Link href="/services/structured-cabling" className="hover:text-teal-300 transition-colors">
+                  Structured Cabling
                 </Link>
               </li>
               <li>
-                <Link href="/av-solutions" className="hover:text-teal-300 transition-colors">
-                  AV Solutions
+                <Link href="/av-solutions/auditorium" className="hover:text-teal-300 transition-colors">
+                  Auditorium
                 </Link>
               </li>
             </ul>
@@ -78,16 +78,16 @@ export function Footer() {
             <ul className="space-y-2">
               <li className="flex items-center gap-2">
                 <Mail className="h-4 w-4 text-teal-400" />
-                <a href="mailto:info@comnest.com" className="hover:text-teal-300 transition-colors">
-                  info@comnest.com
+                <a href="mailto:info@comnestindia.com" className="hover:text-teal-300 transition-colors">
+                  info@comnestindia.com
                 </a>
               </li>
-              <li className="flex items-center gap-2">
+              {/* <li className="flex items-center gap-2">
                 <Phone className="h-4 w-4 text-teal-400" />
                 <a href="tel:+91XXXXXXXXXX" className="hover:text-teal-300 transition-colors">
                   +91-XXXXXXXXXX
                 </a>
-              </li>
+              </li> */}
             </ul>
             <div className="mt-4">
               <h4 className="text-sm font-medium mb-2">Follow Us</h4>

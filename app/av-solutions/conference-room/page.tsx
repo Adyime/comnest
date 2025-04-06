@@ -72,7 +72,7 @@ export default function ConferenceRoomPage() {
               className="relative rounded-xl overflow-hidden shadow-xl"
             >
               <Image
-                src="/placeholder.svg?height=600&width=800"
+                src="/comference.jpg?height=600&width=800"
                 alt="Modern Conference Room"
                 width={800}
                 height={600}

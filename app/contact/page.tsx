@@ -1,12 +1,10 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { Mail, Phone, MapPin, Clock, Send, CheckCircle } from "lucide-react"
-
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -16,15 +14,42 @@ import { PageHeader } from "@/components/page-header"
 
 export default function ContactPage() {
   const [formState, setFormState] = useState<"idle" | "submitting" | "success" | "error">("idle")
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setFormState("submitting")
+    
+    try {
+      const formData = new FormData(e.currentTarget)
+      const formValues = {
+        name: formData.get("name") as string,
+        email: formData.get("email") as string,
+        phone: formData.get("phone") as string || "",
+        subject: formData.get("service") as string || "General Inquiry",
+        message: formData.get("message") as string
+      }
 
-    // Simulate form submission
-    setTimeout(() => {
-      setFormState("success")
-    }, 1500)
+      // Send the email via the API route
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formValues),
+      })
+
+      if (response.ok) {
+        setFormState("success")
+      } else {
+        const data = await response.json()
+        throw new Error(data.message || "Failed to send message")
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error)
+      setFormState("error")
+      setErrorMessage(error instanceof Error ? error.message : "An unknown error occurred")
+    }
   }
 
   const fadeIn = {
@@ -80,6 +105,9 @@ export default function ContactPage() {
                   <p className="text-muted-foreground mb-6">
                     Thank you for contacting us. Our team will get back to you shortly.
                   </p>
+                  {errorMessage && (
+                    <p className="text-red-500 mb-4 text-sm italic">{errorMessage}</p>
+                  )}
                   <Button onClick={() => setFormState("idle")}>Send Another Message</Button>
                 </motion.div>
               ) : (
@@ -87,22 +115,22 @@ export default function ContactPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label htmlFor="name">Full Name</Label>
-                      <Input id="name" placeholder="Your name" required />
+                      <Input id="name" name="name" placeholder="Your name" required />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="email">Email Address</Label>
-                      <Input id="email" type="email" placeholder="Your email" required />
+                      <Input id="email" name="email" type="email" placeholder="Your email" required />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <Label htmlFor="phone">Phone Number</Label>
-                      <Input id="phone" placeholder="Your phone (optional)" />
+                      <Input id="phone" name="phone" placeholder="Your phone (optional)" />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="service">Service of Interest</Label>
-                      <Select>
+                      <Select name="service">
                         <SelectTrigger id="service">
                           <SelectValue placeholder="Select a service" />
                         </SelectTrigger>
@@ -121,7 +149,7 @@ export default function ContactPage() {
 
                   <div className="space-y-2">
                     <Label htmlFor="message">Message</Label>
-                    <Textarea id="message" placeholder="Tell us about your requirements" rows={5} required />
+                    <Textarea id="message" name="message" placeholder="Tell us about your requirements" rows={5} required />
                   </div>
 
                   <Button type="submit" className="w-full md:w-auto" disabled={formState === "submitting"}>
@@ -177,9 +205,9 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-lg mb-1">Our Location</h3>
                     <p className="text-muted-foreground">
-                      123 Tech Park, Sector 15
+                      Sushant Lok, Gurgaon
                       <br />
-                      Gurugram, Haryana 122001
+                      Haryana-122009
                       <br />
                       India
                     </p>
@@ -194,12 +222,7 @@ export default function ContactPage() {
                     <h3 className="font-semibold text-lg mb-1">Phone</h3>
                     <p className="text-muted-foreground">
                       <a href="tel:+911234567890" className="hover:text-teal-600 transition-colors">
-                        +91 123 456 7890
-                      </a>
-                    </p>
-                    <p className="text-muted-foreground">
-                      <a href="tel:+911234567891" className="hover:text-teal-600 transition-colors">
-                        +91 123 456 7891
+                        +91 836 873 9866
                       </a>
                     </p>
                   </div>
@@ -212,13 +235,8 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-lg mb-1">Email</h3>
                     <p className="text-muted-foreground">
-                      <a href="mailto:info@comnest.com" className="hover:text-teal-600 transition-colors">
-                        info@comnest.com
-                      </a>
-                    </p>
-                    <p className="text-muted-foreground">
-                      <a href="mailto:support@comnest.com" className="hover:text-teal-600 transition-colors">
-                        support@comnest.com
+                      <a href="mailto:info@comnestindia.com" className="hover:text-teal-600 transition-colors">
+                        info@comnestindia.com
                       </a>
                     </p>
                   </div>
@@ -233,7 +251,7 @@ export default function ContactPage() {
                     <p className="text-muted-foreground">
                       Monday - Friday: 9:00 AM - 6:00 PM
                       <br />
-                      Saturday: 10:00 AM - 2:00 PM
+                      Saturday: 10:00 AM - 4:00 PM
                       <br />
                       Sunday: Closed
                     </p>
@@ -305,7 +323,7 @@ export default function ContactPage() {
       </section>
 
       {/* Map Section */}
-      <section className="py-16 bg-slate-50">
+      {/* <section className="py-16 bg-slate-50">
         <div className="container">
           <motion.div
             initial="hidden"
@@ -327,7 +345,6 @@ export default function ContactPage() {
             transition={{ duration: 0.6 }}
             className="rounded-xl overflow-hidden shadow-lg h-[400px] relative"
           >
-            {/* Placeholder for an actual map integration */}
             <Image
               src="/placeholder.svg?height=800&width=1600&text=Map"
               alt="Office Location Map"
@@ -353,63 +370,7 @@ export default function ContactPage() {
             </div>
           </motion.div>
         </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-16 md:py-24">
-        <div className="container">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-            variants={fadeIn}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl font-bold tracking-tight mb-4">Frequently Asked Questions</h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Find quick answers to common questions about our services
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {[
-              {
-                question: "What areas do you serve?",
-                answer:
-                  "We primarily serve the National Capital Region (NCR) of India, including Delhi, Gurugram, Noida, and Faridabad. However, we can also provide services to clients across India for specific projects.",
-              },
-              {
-                question: "Do you offer maintenance contracts?",
-                answer:
-                  "Yes, we offer comprehensive maintenance contracts for all our services, including network infrastructure, security systems, and AV solutions. These contracts can be customized based on your specific requirements.",
-              },
-              {
-                question: "How quickly can you respond to service requests?",
-                answer:
-                  "For our clients with maintenance contracts, we typically respond to critical issues within 2-4 hours. For standard service requests, our response time is usually within 24 hours during business days.",
-              },
-              {
-                question: "Can you work with our existing systems?",
-                answer:
-                  "We specialize in integrating with and enhancing existing systems. Our team will assess your current infrastructure and recommend solutions that work seamlessly with what you already have.",
-              },
-            ].map((faq, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white p-6 rounded-xl shadow-sm border border-slate-100"
-              >
-                <h3 className="font-semibold text-lg mb-2">{faq.question}</h3>
-                <p className="text-muted-foreground">{faq.answer}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      </section> */}
     </main>
   )
 }
-
