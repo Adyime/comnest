@@ -39,11 +39,21 @@ export function Navbar() {
         <div className="flex items-center">
           <Logo size="md" />
           <nav className="hidden lg:flex items-center gap-6 ml-8">
-            <Link href="/" className="text-sm font-medium transition-colors hover:text-primary">
+            <Link href="/home" className="text-sm font-medium transition-colors hover:text-primary">
               Home
             </Link>
-            <Link href="/google-workspace" className="text-sm font-medium transition-colors hover:text-primary">
+            {/* <Link href="/google-workspace" className="text-sm font-medium transition-colors hover:text-primary">
               Google Workspace
+            </Link> */}
+            <Link href="/" className="text-sm font-medium transition-colors hover:text-primary" onClick={() => setIsMenuOpen(false)}>
+            <span style={{ color: '#4285F4' }}>G</span>
+            <span style={{ color: '#EA4335' }}>o</span>
+            <span style={{ color: '#FBBC05' }}>o</span>
+            <span style={{ color: '#4285F4' }}>g</span>
+            <span style={{ color: '#34A853' }}>l</span>
+            <span style={{ color: '#EA4335' }}>e</span>
+            <span style={{ color: '#4285F4' }}> </span>
+            <span style={{ color: '#606060' }}>Workspace</span>
             </Link>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

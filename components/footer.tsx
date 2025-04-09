@@ -57,7 +57,7 @@ export function Footer() {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/google-workspace" className="hover:text-teal-300 transition-colors">
+                <Link href="/" className="hover:text-teal-300 transition-colors">
                 Google Workspace
                 </Link>
               </li>
