@@ -138,7 +138,7 @@ export function Navbar() {
         </Button>
       </div>
       {/* Mobile menu */}
-      {/* <AnimatePresence>
+      <AnimatePresence>
         {isMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
@@ -271,139 +271,7 @@ export function Navbar() {
             </div>
           </motion.div>
         )}
-      </AnimatePresence> */}
-      {/* Mobile menu */}
-<AnimatePresence>
-  {isMenuOpen && (
-    <motion.div
-      initial={{ opacity: 0, height: 0 }}
-      animate={{ opacity: 1, height: "auto" }}
-      exit={{ opacity: 0, height: 0 }}
-      transition={{ duration: 0.3 }}
-      className="fixed inset-x-0 top-16 z-50 bg-white dark:bg-slate-900 lg:hidden overflow-y-auto shadow-lg mx-auto rounded-b-lg border-t border-slate-200 dark:border-slate-700"
-      style={{
-        maxHeight: "80vh",
-        maxWidth: "90%",
-        width: "100%",
-        left: "50%",
-        transform: "translateX(-50%)"
-      }}
-    >
-      <div className="container py-4">
-        <nav className="flex flex-col gap-4">
-          <Link
-            href="/home"
-            className="text-base font-medium transition-colors hover:text-primary"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Home
-          </Link>
-          <Link
-            href="/google-workspace"
-            className="text-base font-medium transition-colors hover:text-primary"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            {googleWorkspaceLink}
-          </Link>
-
-          {/* Services dropdown */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="link" className="justify-start text-base font-medium p-0">
-                Services
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-full">
-              <DropdownMenuItem asChild>
-                <Link href="/services/structured-cabling" onClick={() => setIsMenuOpen(false)}>
-                  Structured Cabling & Security Surveillance
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/services/cyber-security" onClick={() => setIsMenuOpen(false)}>
-                  Cyber Security
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          {/* Solutions dropdown */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="link" className="justify-start text-base font-medium p-0">
-                Solutions
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-full">
-              <DropdownMenuItem asChild>
-                <Link href="/solutions/wireless-networking" onClick={() => setIsMenuOpen(false)}>
-                  Wireless Networking Solutions
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/solutions/routing-switching" onClick={() => setIsMenuOpen(false)}>
-                  Routing and Switching Equipment
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/solutions/firewall-security" onClick={() => setIsMenuOpen(false)}>
-                  Firewall and Security Appliances
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/solutions/cisco-telepresence" onClick={() => setIsMenuOpen(false)}>
-                  Cisco Telepresence and WebEx
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/solutions/custom-software" onClick={() => setIsMenuOpen(false)}>
-                  Custom Software Applications
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          {/* AV Solutions dropdown */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="link" className="justify-start text-base font-medium p-0">
-                AV Solutions
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-full">
-              <DropdownMenuItem asChild>
-                <Link href="/av-solutions/auditorium" onClick={() => setIsMenuOpen(false)}>
-                  Auditorium Sound and Visual Systems
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/av-solutions/conference-room" onClick={() => setIsMenuOpen(false)}>
-                  Conference Room AV Setup
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/av-solutions/automation" onClick={() => setIsMenuOpen(false)}>
-                  Home and Office Automation
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/av-solutions/video-conferencing" onClick={() => setIsMenuOpen(false)}>
-                  Video Conferencing Solutions
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          {/* Contact */}
-          <Button asChild className="w-full mt-4" onClick={() => setIsMenuOpen(false)}>
-            <Link href="/contact">Contact Us</Link>
-          </Button>
-        </nav>
-      </div>
-    </motion.div>
-  )}
-</AnimatePresence>
-
+      </AnimatePresence>
     </motion.header>
   )
 }

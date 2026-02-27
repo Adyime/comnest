@@ -1,18 +1,11 @@
-version: "3.8"
-
 services:
   app:
     build: .
-    container_name: comnestindia # Change container name
-    image: comnestindia # Change image name
-    working_dir: /app
-    ports:
-      - "1012:3000"
-    volumes:
-      - ./public:/app/public
-    # Run in production mode using npm start
-    command: ["npm", "start"]
+    container_name: comnestindia
+    restart: always
     environment:
-      - NODE_ENV=production
-      - GMAIL_USER=info@comnestindia.com
-      - GMAIL_PASS=blgkdgvouobsctme
+      GMAIL_USER : ${GMAIL_USER}
+      GMAIL_PASS : ${GMAIL_PASS}
+    ports:
+      - "1006:3000"
+    command: ["npm", "run", "start"]
