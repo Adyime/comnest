@@ -55,7 +55,7 @@ export function Navbar() {
             <Link href="/home" className="text-sm font-medium transition-colors hover:text-primary">
               Home
             </Link>
-            <Link href="/google-workspace" className="text-sm font-medium transition-colors hover:text-primary">
+            <Link href="/" className="text-sm font-medium transition-colors hover:text-primary">
               {googleWorkspaceLink}
             </Link>
             <DropdownMenu>
@@ -299,7 +299,7 @@ export function Navbar() {
             Home
           </Link>
           <Link
-            href="/google-workspace"
+            href="/"
             className="text-base font-medium transition-colors hover:text-primary"
             onClick={() => setIsMenuOpen(false)}
           >
