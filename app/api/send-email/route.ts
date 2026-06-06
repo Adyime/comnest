@@ -25,7 +25,7 @@ export async function POST(request: Request) {
       from: email,
       to: process.env.GMAIL_USER,
       replyTo: email,
-      subject: `Contact Form Submission from ${name}`,
+      subject: `Enquiry From Website from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nSubject: ${subject}\nMessage: ${message}`,
       html: `
         <html>
